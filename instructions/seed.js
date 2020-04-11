@@ -66,7 +66,7 @@ function afterConnection() {
 
     })
 }
-// adding departmanet
+// adding somes department
 function addDepartment() {
     inquirer.prompt([
         {
@@ -74,19 +74,13 @@ function addDepartment() {
             name: "name",
             message: "what is the name of the department?",
 
-        },
-        {
-            type: "input",
-            name: "id",
-            message: "what is the department id?",
-
         }
         
     ]).then(function (answers) {
         connection.query("INSERT INTO department set?", 
         {
             names: answers.name,
-            id: answers.id
+            // id: answers.id
 
         }, function (err, res){
             if (err) throw err
@@ -98,22 +92,57 @@ function addDepartment() {
     
 };
 function addRole(){
-    console.log("roleee")
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "title",
+            message: "what is employee title?",
+
+        }
+        
+    ]).then(function (answers) {
+        connection.query("INSERT INTO department set?", 
+        {
+            names: answers.name,
+            // id: answers.id
+
+        }, function (err, res){
+            if (err) throw err
+            console.table(res);
+            connection.end();
+            
+        })
+    })
+  
 };
 function addEmployee(){
     console.log("employee")
 };
 function viewDepartment(){
-    console.log("viewdepartment")
+    connection.query("SELECT * FROM department", function(err, res){
+        if (err) throw err;
+            
+        
+        console.table(res);
+    })
 
 };
 function viewRole(){
-    console.log("viewrole")
+    connection.query("SELECT * FROM roles", function(err, res){
+        if (err) throw err;
+            
+        
+        console.table(res);
+    })
 };
 
 function viewEmployee(){
-    console.log("viewdemployee")
-
+    connection.query("SELECT * FROM employee", function(err, res){
+        if (err) throw err;
+            
+        
+        console.table(res);
+    })
 };
 
 function updateEmployee(){
