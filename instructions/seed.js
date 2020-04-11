@@ -66,8 +66,36 @@ function afterConnection() {
 
     })
 }
+// adding departmanet
 function addDepartment() {
-    console.log("yea")
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "what is the name of the department?",
+
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "what is the department id?",
+
+        }
+        
+    ]).then(function (answers) {
+        connection.query("INSERT INTO department set?", 
+        {
+            names: answers.name,
+            id: answers.id
+
+        }, function (err, res){
+            if (err) throw err
+            console.table(res);
+            connection.end();
+            
+        })
+    })
+    
 };
 function addRole(){
     console.log("roleee")
