@@ -146,10 +146,11 @@ function addRole() {
 
 // add Employee to a department
 function addEmployee() {
-    connection.query("SELECT * FROM roles", function (err, result) {
-        if (err) throw err
-        console.table(result);
+    connection.query("SELECT * FROM roles", function (err, res) {
 
+        if (err) throw err
+        const allRoles = res.map(item => item.title)
+        console.table(res);
 
         inquirer.prompt([
             {
@@ -165,7 +166,7 @@ function addEmployee() {
 
             },
             {
-                type: "input",
+                type: "list",
                 name: "roleId",
                 // choices: function () {
                 //     var roleChoice = []
@@ -175,6 +176,7 @@ function addEmployee() {
 
                 // },
                 message: "choose the role of the new employee?",
+                choices: allRoles
 
             },
             {
@@ -185,11 +187,12 @@ function addEmployee() {
             }
 
         ]).then(function (answers) {
+            const chosenRole = res.filter(item => item.title === answers.roleId)
             connection.query("INSERT INTO employee set?",
                 {
                     first_name: answers.firstName,
                     last_name: answers.lastName,
-                    role_id: answers.roleId,
+                    role_id: chosenRole[0].id,
                     manager_id: answers.managerId
 
                 }, function (err, res) {

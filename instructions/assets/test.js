@@ -6,3 +6,16 @@
 //         name: title,
 //         value: id
 //     }))
+
+var fruits = ["mango", "banana", "mango", "potatoe", "blavkberry", "strawberry"] 
+
+fruits.forEach(function(fruits){
+    console.log(fruits);
+})
+
+var num = [1, 3, 6, 9, 12,]
+const double = num.map(function(number){
+    var nums = number * 2
+
+    console.log(nums);
+})
