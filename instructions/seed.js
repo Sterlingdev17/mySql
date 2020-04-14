@@ -235,15 +235,16 @@ function viewEmployee() {
 function updateEmployee() {
     connection.query("SELECT * FROM employee", function (err, res) {
         if (err) throw err;
+        const employeeUpdate = res.map(item => item.first_name)
         console.table(res);
 
         // console.log(choices);
         inquirer.prompt([
             {
-                type: "input",
-                name: "employeeId",
-                message: "what is the employee Id?",
-
+                type: "list",
+                name: "employeeName",
+                message: "choose the employee you want to update?",
+                choices: employeeUpdate
             },
             {
                 type: "rawlist",
